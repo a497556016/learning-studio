@@ -1,0 +1,39 @@
+server:
+  port: 2020
+spring:
+  application:
+    name: learning-studio-service
+  data:
+    mongodb:
+      uri: mongodb://192.168.0.45:27017/learning-studio-service
+    rest:
+      base-path: /api/v1
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+security:
+  oauth2:
+    client:
+      client-id: LearnStudio
+      client-secret: 123456
+      access-token-uri: http://localhost:8081/oauth/token
+      user-authorization-uri: http://localhost:8081/oauth/authorize
+      scope: all
+      registered-redirect-uri: http://localhost:8080/oauth
+    authorization:
+      check-token-access: http://localhost:8081/oauth/check_token
+    resource:
+      token-info-uri: http://localhost:8081/oauth/check_token
+      user-info-uri: http://localhost:8081/user
+      jwt:
+        key-uri: http://localhost:8081/oauth/
+        key-value: hshw
