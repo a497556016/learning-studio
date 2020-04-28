@@ -2,12 +2,14 @@ package com.heshaowei.studioservice.security.oauth2.config;
 
 import com.heshaowei.studioservice.security.filters.resource.MyFilterSecurityInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+//@EnableOAuth2Sso
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyFilterSecurityInterceptor myFilterSecurityInterceptor;

@@ -1,6 +1,7 @@
 import account from "../../api/account";
 import storage from "../../utils/storage";
 const LOGIN_USER_KEY = "LOGIN_USER_KEY";
+import {security} from "../../api/oauth";
 export default {
     namespaced: true,
     state: {
@@ -18,6 +19,11 @@ export default {
         setLoginUser(state, loginUser) {
             state.loginUser = loginUser;
             storage.put(LOGIN_USER_KEY, state.loginUser);
+        },
+        logout(state){
+            state.loginUser = null;
+            storage.remove(LOGIN_USER_KEY);
+            window.location.href = security.resource.logout_uri
         }
     },
     actions: {
@@ -27,6 +33,7 @@ export default {
                 userInfo,
                 tokenInfo
             });
-        }
+        },
+
     }
 }

@@ -7,7 +7,7 @@
                         Study Studios
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        看看
+                        <a style="color: #88a1ff" @click="logout">退出登录</a>
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -84,6 +84,11 @@
         computed: {
             ...appStore.mapGetters({
                 loginUser: "getLoginUser"
+            })
+        },
+        methods: {
+            ...appStore.mapMutations({
+                logout: 'logout'
             })
         }
     };

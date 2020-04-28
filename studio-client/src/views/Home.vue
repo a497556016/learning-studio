@@ -35,7 +35,7 @@
                     <v-list-item :to="'/blog/details/'+item.id">
                       <v-list-item-content>
                         <v-list-item-title v-html="item.title"></v-list-item-title>
-                        <v-list-item-subtitle v-html="item.shortDesc"></v-list-item-subtitle>
+                        <v-list-item-subtitle v-html="item.content"></v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
                   </div>
@@ -49,9 +49,12 @@
             <v-card-title>标签</v-card-title>
             <v-divider></v-divider>
             <v-card-text class="d-flex justify-start">
-              <v-btn depressed small class="ml-2">日记</v-btn>
-              <v-btn depressed small class="ml-2">心得</v-btn>
-              <v-btn depressed small class="ml-2">教程</v-btn>
+              <v-row>
+                <v-col cols="12" lg="3" md="4" sm="6"><v-btn depressed small class="ml-2">日记</v-btn></v-col>
+                <v-col cols="12" lg="3" md="4" sm="6"><v-btn depressed small class="ml-2">心得</v-btn></v-col>
+                <v-col cols="12" lg="3" md="4" sm="6"><v-btn depressed small class="ml-2">教程</v-btn></v-col>
+                <v-col cols="12" lg="3" md="4" sm="6"><v-btn depressed small class="ml-2">教程</v-btn></v-col>
+              </v-row>
             </v-card-text>
           </v-card>
         </v-col>
@@ -61,19 +64,28 @@
 </template>
 
 <script>
-
+  import {createNamespacedHelpers} from "vuex";
+  const documentStore = createNamespacedHelpers("document");
 export default {
   name: 'home',
   components: {
 
   },
   data: () => ({
-    items: [
-      {id: "1", title: "Vuetify学习笔记", shortDesc: "啦啦啦啦啦啦啦啦啦啦啦啦啦啦"},
-      {id: "2", title: "Hyperledger Fabric 超级账本环境搭建（一）", shortDesc: "啦啦啦啦啦啦啦啦啦啦啦啦啦啦"}
-    ]
+
   }),
+  computed: {
+    ...documentStore.mapState({
+      items: state => state.documents
+    })
+  },
+  mounted(){
+    this.loadData();
+  },
   methods: {
+    ...documentStore.mapActions({
+      loadData: 'findByPage'
+    }),
     toDetails(){
 
     }

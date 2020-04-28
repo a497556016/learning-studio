@@ -1,7 +1,10 @@
-import http from "../utils/net/http"
+import http from "../utils/net/http";
 
 export default {
     save(document){
-        return http.post("api/v1/documents", document);
+        return http.post("/documents", document);
+    },
+    findByPage(){
+        return http.get('/documents');
     }
 }

@@ -5,6 +5,9 @@ export default {
     }
     localStorage.setItem(key, value);
   },
+  remove(key) {
+    localStorage.removeItem(key);
+  },
   getString(key) {
     return localStorage.getItem(key);
   },

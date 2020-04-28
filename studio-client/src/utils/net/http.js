@@ -1,5 +1,6 @@
 import axios from "axios";
-import { BASE_URL } from "../../config";
+import config from "../../config";
+console.log(config);
 
 import interceptor from "./interceptor";
 
@@ -7,7 +8,7 @@ interceptor(axios);
 
 // axios默认配置
 axios.defaults.timeout = 10000; // 超时时间
-axios.defaults.baseURL = BASE_URL; // 默认地址
+axios.defaults.baseURL = config.BASE_URL + config.API_BASE_URL; // 默认地址
 
 axios.withLoading = function() {
   this.$loading = null;

@@ -1,11 +1,14 @@
 server:
   port: 2020
+  servlet:
+    context-path: /learn-studio
 spring:
   application:
     name: learning-studio-service
   data:
     mongodb:
-      uri: mongodb://192.168.0.45:27017/learning-studio-service
+      uri: mongodb+srv://root:123+qwe.com@cluster0-xrii2.mongodb.net/test?retryWrites=true&w=majority
+    #      uri: mongodb://192.168.3.9:27017/learning-studio-service
     rest:
       base-path: /api/v1
   jpa:
@@ -27,8 +30,6 @@ security:
       client-secret: 123456
       access-token-uri: http://localhost:8081/oauth/token
       user-authorization-uri: http://localhost:8081/oauth/authorize
-      scope: all
-      registered-redirect-uri: http://localhost:8080/oauth
     authorization:
       check-token-access: http://localhost:8081/oauth/check_token
     resource:

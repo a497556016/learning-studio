@@ -39,7 +39,7 @@ public class MyResourceServerConfig extends ResourceServerConfigurerAdapter {
 //                .authenticated()
 
                 //配置不需要认证的请求
-                .antMatchers("/oauth/token", "/", "/lib/**", "/app/rest/admin/process-instances/*/model-json", "/app/rest/admin/process-instances/*/history-model-json", "/app/rest/admin/process-definitions/*/model-json")
+                .antMatchers("/oauth/token")
                 .permitAll()
 
                 //其他请求都需要权限

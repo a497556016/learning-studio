@@ -6,6 +6,7 @@ import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -59,6 +60,8 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
             if(null==token) {
                 throw new AccessDeniedException("没有访问权限！");
             }else {
+                Object principal = token.getSecurityContext().getAuthentication().getPrincipal();
+                System.out.println("当前登录用户：" + principal);
 //                SecurityContextHolder.getContext().setAuthentication(token.getSecurityContext().getAuthentication());
             }
             //执行下一个拦截器

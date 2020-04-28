@@ -7,7 +7,7 @@
 <script>
     import {createNamespacedHelpers} from "vuex";
     const appStore = createNamespacedHelpers("app");
-    import OauthService from "../api/oauth";
+    import OauthService, {security} from "../api/oauth";
     export default {
         name: "Oauth",
         data(){
@@ -22,17 +22,16 @@
                     code: query.code,
                     state: query.state
                 });
+                console.log(data)
                 const user = await OauthService.user(data.access_token);
                 console.log(user);
                 this.setLoginUser({
-                    userInfo: {
-                      username: user
-                    },
+                    userInfo: user,
                     tokenInfo: data
                 });
                 await this.$router.push("/");
             } else {
-                window.location.href = 'http://localhost:8081/oauth/authorize?response_type=code&client_id=LearnStudio&redirect_uri=http://localhost:8080/oauth&state=MyLove'
+                window.location.href = security.client.user_authorization_uri + '?response_type=code&client_id='+security.client.client_id+'&redirect_uri='+security.client.registered_redirect_uri+'&state=MyLove'
             }
         },
         methods: {

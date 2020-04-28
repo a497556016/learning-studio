@@ -1,33 +1,44 @@
 import http from "../utils/net/http";
+import config from "../config";
 
-const security = {
+export const base_path = "http://localhost:8081";
+export const security = {
+
     client: {
         client_id: "LearnStudio",
-        client_secret: '123456',
-        access_token_uri: "http://localhost:8081/oauth/token",
-        user_authorization_uri: "http://localhost:8081/oauth/authorize",
-        scope: "all",
-        registered_redirect_uri: "http://localhost:8080/oauth"
+        access_token_uri: config.BASE_URL + "oauth/token",
+        user_authorization_uri: base_path + "/oauth/authorize",
+        registered_redirect_uri: window.location.origin + process.env.BASE_URL + "oauth"
     },
     authorization: {
-        check_token_access: "http://localhost:8081/oauth/check_token"
+        check_token_access: base_path + "/oauth/check_token"
     },
     resource: {
-        token_info_uri: "http://localhost:8081/oauth/check_token",
-        user_info_uri: "http://localhost:8081/user"
+        token_info_uri: base_path + "/oauth/check_token",
+        user_info_uri: base_path + "/user",
+        logout_uri: base_path + "/logout",
     },
-}
+};
 
 export default {
 
-    token(params){
+    // token(params){
+    //     return http.post(security.client.access_token_uri, null, {
+    //         params: {
+    //             grant_type: 'authorization_code',
+    //             code: params.code,
+    //             client_id: security.client.client_id,
+    //             client_secret: security.client.client_secret,
+    //             redirect_uri: security.client.registered_redirect_uri
+    //         }
+    //     })
+    // },
+
+    token(params) {
         return http.post(security.client.access_token_uri, null, {
             params: {
-                grant_type: 'authorization_code',
                 code: params.code,
-                client_id: security.client.client_id,
-                client_secret: security.client.client_secret,
-                redirect_uri: security.client.registered_redirect_uri
+                redirectUri: security.client.registered_redirect_uri
             }
         })
     },

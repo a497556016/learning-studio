@@ -1,1 +1,1 @@
-export const BASE_URL = "http://192.168.0.170:2020/";
+export const BASE_URL = "http://localhost:2020/learn-studio/";

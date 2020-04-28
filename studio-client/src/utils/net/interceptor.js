@@ -58,7 +58,7 @@ export default http => {
                   message: "登录已失效，请重新登录！",
                   color: "error"
               });
-              router.push({path: '/login'});
+              router.push({path: '/oauth'});
               return;
           }
         const msg = error.response.data.error_description;
